@@ -44,7 +44,7 @@ class Saxon extends Soldier{
   
     receiveDamage(damage) {
         this.health = this.health - damage;
-        if (this.health === 0) {
+        if (this.health <= 0) {
             return `A Saxon has died in combat`
         } else {
             return `A Saxon has received ${damage} points of damage`
@@ -71,28 +71,46 @@ class War {
    }
 
    vikingAttack(){
-       
-  this.saxonArmy[0].receiveDamage(this.vikingArmy[0].strength);
 
-    const alive = this.saxonArmy.filter(saxon => saxon.health >= 1);
-     if (this.saxonArmy[0] !== alive){
-         return this.saxonArmy
-     } else {
-        return this.saxonArmy[0].receiveDamage(this.vikingArmy[0].strength);
-     }
-   
+    let randomSaxon = this.saxonArmy[Math.floor(Math.random() * this.saxonArmy.length)]
+    let randomViking  = this.vikingArmy[Math.floor(Math.random()  * this.vikingArmy.length)]
 
-    }
+    let  result = randomSaxon.receiveDamage(randomViking.strength); 
+    this.saxonArmy= this.saxonArmy.filter(saxon => saxon.health >= 1);
+  
+    return result
 
+   } 
+/*
+   Attack (){
+    let randomSaxon = this.saxonArmy[Math.floor(Math.random() * this.saxonArmy.length)]
+    let randomViking  = this.vikingArmy[Math.floor(Math.random()  * this.vikingArmy.length)]
+
+   }
+   */
 
    saxonAttack(){
 
-    this.vikingArmy[0].receiveDamage(this.saxonArmy[0].strength);
+    let randomSaxon = this.saxonArmy[Math.floor(Math.random() * this.saxonArmy.length)]
+    let randomViking  = this.vikingArmy[Math.floor(Math.random()  * this.vikingArmy.length)]
+
+    let  result = randomViking.receiveDamage(randomSaxon.strength); 
+    this.vikingArmy= this.vikingArmy.filter(viking => viking.health >= 1);
+  
+    return result
 
 
    }
 
+
    showStatus(){
+    if (this.saxonArmy.length === 0){
+        return "Vikings have won the war of the century!"
+    } else if (this.vikingArmy.length === 0){
+        return "Saxons have fought for their lives and survived another day..."
+    } else {
+        return "Vikings and Saxons are still in the thick of battle."
+    }
 
    }
 
