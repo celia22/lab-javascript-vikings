@@ -81,13 +81,7 @@ class War {
     return result
 
    } 
-/*
-   Attack (){
-    let randomSaxon = this.saxonArmy[Math.floor(Math.random() * this.saxonArmy.length)]
-    let randomViking  = this.vikingArmy[Math.floor(Math.random()  * this.vikingArmy.length)]
 
-   }
-   */
 
    saxonAttack(){
 
